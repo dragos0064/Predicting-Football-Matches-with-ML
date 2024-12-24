@@ -1,13 +1,16 @@
 # Predicting-Football-Matches-with-ML⚽
 This project leverages machine learning to predict the outcomes of football matches in the Premier League, using historical data and advanced statistical techniques. The model predicts whether a team will win, lose, or draw a match based on features such as venue, opponent, time, and rolling averages of key metrics like goals scored, shots, and possession.
 
-## Project Highlights
-Data Source: Match data is extracted from FBRef and preprocessed into a clean, structured format.
-Machine Learning: A Random Forest Classifier is trained to predict match outcomes, achieving competitive accuracy.
-Rolling Averages: Incorporates rolling averages of key performance metrics (e.g., goals, shots, possession) to capture team form over time.
-Model Evaluation: Evaluates performance using metrics like accuracy and precision to ensure reliability.
-Dataset
-The dataset includes:
+## Project Highlights:
+- Data Source: Match data is extracted from FBRef and preprocessed into a clean, structured format.
+### Machine Learning: 
+- A Random Forest Classifier is trained to predict match outcomes, achieving competitive accuracy.
+### Rolling Averages: 
+- Incorporates rolling averages of key performance metrics (e.g., goals, shots, possession) to capture team form over time.
+### Model Evaluation: 
+- Evaluates performance using metrics like accuracy and precision to ensure reliability.
+## Dataset
+- **The dataset includes:**
 
 ### General Match Details:
 - date, time, venue, opponent, team
