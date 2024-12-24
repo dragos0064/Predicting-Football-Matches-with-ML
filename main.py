@@ -61,3 +61,23 @@ matches_rolling = matches.groupby("team").apply(lambda x: rolling_averages(x, co
 matches_rolling = matches_rolling.droplevel('team')
 matches_rolling.index = range(matches_rolling.shape[0])
 print(matches_rolling)
+
+
+# Retraining our machine learning model
+def make_predictions(data, predictors):
+    train = data[data["date"] < '2022-01-01']
+    test = data[data["date"] > '2022-01-01']
+    rf.fit(train[predictors], train["target"])
+    preds = rf.predict(test[predictors])
+    combined = pd.DataFrame(dict(actual=test["target"], predicted=preds), index=test.index)
+    precision = precision_score(test["target"], preds)
+    return combined, precision
+
+
+combined, precision = make_predictions(matches_rolling, predictors + new_cols)
+print(precision)
+print(combined)
+
+combined = combined.merge(matches_rolling[["date", "team", "opponent", "result"]], left_index=True, right_index=True)
+print(combined)
+
