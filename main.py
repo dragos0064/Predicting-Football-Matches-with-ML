@@ -65,7 +65,7 @@ for year in years:
         links = [l.get("href") for l in soup.find_all('a')]
         links = [l for l in links if l and 'all_comps/shooting/' in l]
         data = requests.get(f"https://fbref.com{links[0]}")
-        time.sleep(15)
+        time.sleep(10)
         shooting = pd.read_html(data.text, match="Shooting")[0]
         shooting.columns = shooting.columns.droplevel()
         try:
@@ -77,7 +77,7 @@ for year in years:
         team_data["Season"] = year
         team_data["Team"] = team_name
         all_matches.append(team_data)
-        time.sleep(15)
+        time.sleep(10)
 match_df = pd.concat(all_matches)
 match_df.columns = [c.lower() for c in match_df.columns]
 match_df.to_csv("matches.csv")
