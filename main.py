@@ -81,3 +81,30 @@ print(combined)
 combined = combined.merge(matches_rolling[["date", "team", "opponent", "result"]], left_index=True, right_index=True)
 print(combined)
 
+
+# Combining home and away predictions
+class MissingDict(dict):
+    __missing__ = lambda self, key: key
+
+
+map_values = {
+    "Brighton and Hove Albion": "Brighton",
+    "Manchester United": "Manchester Utd",
+    "Newcastle United": "Newcastle Utd",
+    "Tottenham Hotspur": "Tottenham",
+    "West Ham United": "West Ham",
+    "Wolverhampton Wanderers": "Wolves"
+}
+
+mapping = MissingDict(**map_values)
+print(mapping["West Ham United"])
+
+combined["new_team"] = combined["team"].map(mapping)
+print(combined)
+
+merged = combined.merge(combined, left_on=["date", "new_team"], right_on=["date", "opponent"])
+print(merged)
+print(merged[(merged["predicted_x"] == 1) & (merged["predicted_y"] == 0)]["actual_x"].value_counts())
+
+
+
